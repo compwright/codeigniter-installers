@@ -1,8 +1,9 @@
 CodeIgniter Installers for Composer
 ===================================
 
-Composer installers for CodeIgniter components, [Sparks](http://getsparks.org/),
-and [modules](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home)
+[Composer](http://getcomposer.org) installers for [CodeIgniter](http://codeigniter.com) components,
+[Sparks](http://getsparks.org/), and
+[modules](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home)
 
 Usage
 -----
@@ -30,13 +31,9 @@ Supported Package Types
 Package Type              | Installs To
 --------------------------|-------------------------------------
 `codeigniter-library`     | `application/libraries/{package}/`
---------------------------|-------------------------------------
 `codeigniter-core`        | `application/core/`
---------------------------|-------------------------------------
-`codeigniter-third-party` | `application/third-party/{package}/`
---------------------------|-------------------------------------
+`codeigniter-third-party` | `application/third_party/{package}/`
 `codeigniter-module`      | `application/modules/{package}/`
---------------------------|-------------------------------------
 `codeigniter-spark`       | `sparks/{package}/`
 
 
