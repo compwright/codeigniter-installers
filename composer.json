@@ -1,0 +1,33 @@
+{
+	"name": "compwright/codeigniter-installers",
+	"type": "composer-installer",
+	"description": "Composer installers for CodeIgniter",
+	"license": "MIT",
+	"keywords": [
+		"codeigniter", "composer", "installer", "spark", "sparks",
+		"module", "MX", "HMVC", "core", "library"
+	],
+	"authors": [
+		{
+			"name": "Jonathon Hill",
+			"email": "jhill9693@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"homepage": "https://github.com/compwright/codeigniter-installers",
+	"support": {
+		"issues": "https://github.com/compwright/codeigniter-installers/issues",
+		"source": "https://github.com/compwright/codeigniter-installers"
+	},
+	"autoload": {
+		"psr-0": {
+			"Composer\\Installer": "src/"
+		}
+	},
+	"extra": {
+		"class": "Composer\\Installer\\CodeigniterInstaller"
+	},
+    "require-dev": {
+        "composer/composer": "1.0.*@dev"
+    }
+}
