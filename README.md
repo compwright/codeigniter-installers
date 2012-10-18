@@ -1,6 +1,8 @@
 CodeIgniter Installers for Composer
 ===================================
 
+[![Build Status](https://secure.travis-ci.org/compwright/codeigniter-installers.png)](http://travis-ci.org/compwright/codeigniter-installers)
+
 [Composer](http://getcomposer.org) installers for [CodeIgniter](http://codeigniter.com) components,
 [Sparks](http://getsparks.org/), and
 [modules](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home)
