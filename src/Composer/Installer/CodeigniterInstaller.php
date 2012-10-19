@@ -52,7 +52,9 @@ class CodeigniterInstaller extends LibraryInstaller
 			$name = $prettyName;
 		}
 		
-		$extra = $package->getExtra();
+		$extra = ($this->composer->getPackage())
+		       ? $this->commposer->getPackage()->getExtra()
+		       : array();
 		
 		$appdir = (!empty($extra['codeigniter-application-dir']))
 		        ? $extra['codeigniter-application-dir']
