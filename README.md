@@ -21,9 +21,18 @@ To use, simply specify the desired `type` from the list below and `require` the
 }
 ```
 
-Note that this installer expects your project's `composer.json` file to be in your CodeIgniter root directory
-(at the same level as the `application` and `system` directories) for a default install of CodeIgniter
-2.0 and up.
+By default this installer expects your project's `composer.json` file to be at the same level as your
+`application` directory and `sparks` directory. If you are using a different directory structure for
+your project, you will need to configure the paths accordingly in your project `composer.json` file:
+
+```json
+{
+	"extra": {
+		"codeigniter-application-dir": "Source/application",
+		"codeigniter-sparks-dir": "Source/sparks",
+	}
+}
+```
 
 Supported Package Types
 -----------------------

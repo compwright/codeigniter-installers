@@ -17,11 +17,11 @@ use Composer\Repository\InstalledRepositoryInterface;
 class CodeigniterInstaller extends LibraryInstaller
 {
 	protected $package_install_paths = array(
-		'codeigniter-library'	 	=> 'application/libraries/{name}/',
-		'codeigniter-core'			=> 'application/core/{name}/',
-		'codeigniter-third-party'	=> 'application/third_party/{name}/',
-		'codeigniter-module' 	 	=> 'application/modules/{name}/',
-		'codeigniter-spark'  	 	=> 'sparks/{name}/',
+		'codeigniter-library'	 	=> '{application}/libraries/{name}/',
+		'codeigniter-core'			=> '{application}/core/{name}/',
+		'codeigniter-third-party'	=> '{application}/third_party/{name}/',
+		'codeigniter-module' 	 	=> '{application}/modules/{name}/',
+		'codeigniter-spark'  	 	=> '{sparks}/{name}/',
 	);
 
 	/**
@@ -52,10 +52,22 @@ class CodeigniterInstaller extends LibraryInstaller
 			$name = $prettyName;
 		}
 		
+		$extra = $package->getExtra();
+		
+		$appdir = (!empty($extra['codeigniter-application-dir']))
+		        ? $extra['codeigniter-application-dir']
+		        : 'application';
+		
+		$sparksdir = (!empty($extra['codeigniter-sparks-dir']))
+		           ? $extra['codeigniter-sparks-dir']
+		           : 'sparks';
+		
 		$vars = array(
-			'{name}' => $name,
-			'{vendor}' => $vendor,
-			'{type}' => $type
+			'{name}'        => $name,
+			'{vendor}'      => $vendor,
+			'{type}'        => $type,
+			'{application}' => $appdir,
+			'{sparks}'      => $sparksdir,
 		);
 		
 		return str_replace(array_keys($vars), array_values($vars), $this->package_install_paths[$type]);
