@@ -53,7 +53,7 @@ class CodeigniterInstaller extends LibraryInstaller
 		}
 		
 		$extra = ($this->composer->getPackage())
-		       ? $this->commposer->getPackage()->getExtra()
+		       ? $this->composer->getPackage()->getExtra()
 		       : array();
 		
 		$appdir = (!empty($extra['codeigniter-application-dir']))
