@@ -27,7 +27,7 @@
 	"extra": {
 		"class": "Composer\\Installer\\CodeigniterInstaller"
 	},
-    "require-dev": {
-        "composer/composer": "1.0.*@dev"
-    }
+	"require-dev": {
+		"composer/composer": "1.0.*@dev"
+	}
 }
