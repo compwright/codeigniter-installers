@@ -134,6 +134,12 @@ class CodeigniterInstaller extends LibraryInstaller
 						mkdir($migrationPath, 0777, TRUE);
 					}
 					
+					// @HACK to work around the security check in CI config files
+					if ( ! defined('BASEPATH'))
+					{
+						define('BASEPATH', 1);
+					}
+
 					// Determine what type of migration naming style to use
 					// (see https://github.com/EllisLab/CodeIgniter/pull/1949)
 					$configPath = dirname(dirname($downloadPath)).'/config/';
