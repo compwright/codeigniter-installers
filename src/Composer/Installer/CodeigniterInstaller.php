@@ -123,10 +123,11 @@ class CodeigniterInstaller extends LibraryInstaller
 			case 'codeigniter-module':
 				// If the module has migrations, copy them into the application migrations directory
 				$moduleMigrations = glob($downloadPath.'/migrations/*.php');
+				var_dump($downloadPath.'/migrations/*.php', $moduleMigrations);
 				if (count($moduleMigrations) > 0)
 				{
 					$migrationPath = dirname(dirname($downloadPath)).'/migrations/';
-					
+					var_dump($migrationPath);
 					// Create the application migration directory if it doesn't exist
 					if ( ! file_exists($migrationPath))
 					{
@@ -137,6 +138,7 @@ class CodeigniterInstaller extends LibraryInstaller
 					// (see https://github.com/EllisLab/CodeIgniter/pull/1949)
 					$configPath = dirname(dirname($downloadPath)).'/config/';
 					@include($configPath.'migration.php');
+					var_dump($configPath.'migration.php', $config);
 					if (isset($config['migration_style']) && $config['migration_style'] === 'timestamp')
 					{
 						$number = (int) date('YmdHis');
@@ -156,6 +158,8 @@ class CodeigniterInstaller extends LibraryInstaller
 						}
 					}
 					
+					var_dump($number);
+					
 					// Copy each migration into the application migration directory
 					sort($moduleMigrations);
 					foreach ($moduleMigrations as $migration)
@@ -165,6 +169,7 @@ class CodeigniterInstaller extends LibraryInstaller
 						                preg_replace('/^(\d+)/', sprintf('%03d', $number), basename($migration));
 						
 						// Copy the migration file
+						var_dump($migration, $newMigration);
 						copy($migration, $newMigration);
 						
 						$number++;
