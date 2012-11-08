@@ -106,15 +106,69 @@ class CodeigniterInstaller extends LibraryInstaller
 		switch ($type)
 		{
 			case 'codeigniter-core':
+				// Move the core library extension out of the package directory and remove it
 				$this->moveCoreFiles($downloadPath);
 			break;
 			
 			case 'codeigniter-library':
+				// Move the library files out of the package directory and remove it
 				$wildcard = "MY_*.php";
 				$path = realpath($downloadPath).'/'.$wildcard;
 				if (count(glob($path)) > 0)
 				{
 					$this->moveCoreFiles($downloadPath, $wildcard);
+				}
+			break;
+			
+			case 'codeigniter-module':
+				// If the module has migrations, copy them into the application migrations directory
+				$moduleMigrations = glob($downloadPath.'/migrations/*.php');
+				if (count($moduleMigrations) > 0)
+				{
+					$migrationPath = dirname(dirname($downloadPath)).'/migrations/';
+					
+					// Create the application migration directory if it doesn't exist
+					if ( ! file_exists($migrationPath))
+					{
+						mkdir($migrationPath, 0777, TRUE);
+					}
+					
+					// Determine what type of migration naming style to use
+					// (see https://github.com/EllisLab/CodeIgniter/pull/1949)
+					$configPath = dirname(dirname($downloadPath)).'/config/';
+					@include($configPath.'migration.php');
+					if (isset($config['migration_style']) && $config['migration_style'] === 'timestamp')
+					{
+						$number = (int) date('YmdHis');
+					}
+					else
+					{
+						// Get the latest migration number and increment
+						$migrations = glob($migrationPath.'*.php');
+						if (count($migrations) > 0)
+						{
+							sort($migrations);
+							$number = (int) array_pop($migrations) + 1;
+						}
+						else
+						{
+							$number = 1;
+						}
+					}
+					
+					// Copy each migration into the application migration directory
+					sort($moduleMigrations);
+					foreach ($moduleMigrations as $migration)
+					{
+						// Re-number the migration
+						$newMigration = dirname($migration) . DIRECTORY_SEPARATOR .
+						                preg_replace('/^(\d+)/', sprintf('%03d', $number), basename($migration));
+						
+						// Copy the migration file
+						copy($migration, $newMigration);
+						
+						$number++;
+					}
 				}
 			break;
 		}
@@ -132,12 +186,26 @@ class CodeigniterInstaller extends LibraryInstaller
 		$dst = dirname($dir);
 		
 		// Move the files up one level
-		shell_exec("mv -f $dir/$wildcard $dst/");
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+		{
+			shell_exec("move /Y $dir/$wildcard $dst/");
+		}
+		else
+		{
+			shell_exec("mv -f $dir/$wildcard $dst/");
+		}
 		
 		// If there are no PHP files left in the package dir, remove the directory
 		if (count(glob("$dir/*.php")) === 0)
 		{
-			shell_exec("rm -Rf $dir");
+			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+			{
+				shell_exec("rd /S /Q $dir");
+			}
+			else
+			{
+				shell_exec("rm -Rf $dir");
+			}
 		}
 	}
 }
