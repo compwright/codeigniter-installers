@@ -159,7 +159,9 @@ class CodeigniterInstaller extends LibraryInstaller
 							sort($migrations);
 							$migration = array_pop($migrations);
 							$parts = explode('_', $migration);
-							$number = ((int) array_shift($parts)) + 1;
+							$number = array_shift($parts);
+							var_dump($number);
+							$number++;
 						}
 						else
 						{
@@ -174,7 +176,7 @@ class CodeigniterInstaller extends LibraryInstaller
 					foreach ($moduleMigrations as $migration)
 					{
 						// Re-number the migration
-						$newMigration = dirname($migration) . DIRECTORY_SEPARATOR .
+						$newMigration = $migrationPath .
 						                preg_replace('/^(\d+)/', sprintf('%03d', $number), basename($migration));
 						
 						// Copy the migration file
