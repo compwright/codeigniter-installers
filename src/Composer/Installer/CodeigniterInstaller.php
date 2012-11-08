@@ -157,7 +157,9 @@ class CodeigniterInstaller extends LibraryInstaller
 						if (count($migrations) > 0)
 						{
 							sort($migrations);
-							$number = ((int) array_pop($migrations)) + 1;
+							$migration = array_pop($migrations);
+							$parts = explode('_', $migration);
+							$number = ((int) array_shift($parts)) + 1;
 						}
 						else
 						{
