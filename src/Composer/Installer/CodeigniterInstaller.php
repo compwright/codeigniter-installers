@@ -122,8 +122,8 @@ class CodeigniterInstaller extends LibraryInstaller
 			
 			case 'codeigniter-module':
 				// If the module has migrations, copy them into the application migrations directory
-				$moduleMigrations = glob($downloadPath.'/migrations/*.php');
-				var_dump($downloadPath.'/migrations/*.php', $moduleMigrations);
+				$moduleMigrations = glob($downloadPath.'migrations/*.php');
+				var_dump($downloadPath.'migrations/*.php', $moduleMigrations);
 				if (count($moduleMigrations) > 0)
 				{
 					$migrationPath = dirname(dirname($downloadPath)).'/migrations/';
