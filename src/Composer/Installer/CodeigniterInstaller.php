@@ -153,10 +153,11 @@ class CodeigniterInstaller extends LibraryInstaller
 					{
 						// Get the latest migration number and increment
 						$migrations = glob($migrationPath.'*.php');
+						var_dump($migrationPath.'*.php', $migrations);
 						if (count($migrations) > 0)
 						{
 							sort($migrations);
-							$number = (int) array_pop($migrations) + 1;
+							$number = ((int) array_pop($migrations)) + 1;
 						}
 						else
 						{
