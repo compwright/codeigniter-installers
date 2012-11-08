@@ -158,10 +158,7 @@ class CodeigniterInstaller extends LibraryInstaller
 						{
 							sort($migrations);
 							$migration = array_pop($migrations);
-							$parts = explode('_', $migration);
-							$number = array_shift($parts);
-							var_dump($number);
-							$number++;
+							$number = ((int) basename($migration)) + 1;
 						}
 						else
 						{
