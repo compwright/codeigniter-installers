@@ -142,7 +142,7 @@ class CodeigniterInstaller extends LibraryInstaller
 					// (see https://github.com/EllisLab/CodeIgniter/pull/1949)
 					$configPath = dirname(dirname($downloadPath)).'/config/';
 					@include($configPath.'migration.php');
-					if (isset($config['migration_style']) && $config['migration_style'] === 'timestamp')
+					if (isset($config['migration_type']) && $config['migration_type'] === 'timestamp')
 					{
 						$number = (int) date('YmdHis');
 					}
